@@ -3,6 +3,7 @@ package com.example.fourth.config;
 import com.example.fourth.filter.MyFilter1;
 import com.example.fourth.filter.MyFilter3;
 import com.example.fourth.jwt.JwtAuthenticationFilter;
+import com.example.fourth.jwt.JwtAuthorizationFilter;
 import com.example.fourth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,8 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http
                     .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager));
-                    //.addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
+                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
         }
     }
 

@@ -56,6 +56,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String jwtToken =Jwts.builder()
                 .setSubject("cos토큰")
                 .claim("id", principalDetails.getUser().getId())
+                .claim("username", principalDetails.getUser().getUsername())
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(new Date(System.currentTimeMillis() + (60000 * 10))) // 10분
                 .compact();
